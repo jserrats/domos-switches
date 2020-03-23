@@ -14,6 +14,8 @@ void MQTT_connect();
 
 void setup() {
   Serial.begin(115200);
+  pinMode(BUILTIN_LED, OUTPUT);
+  digitalWrite(BUILTIN_LED, LOW);
   delay(10);
   pinMode(D1, INPUT);
 
@@ -29,6 +31,8 @@ void setup() {
   Serial.println();
   Serial.println("WiFi connected");
   Serial.println("IP address: "); Serial.println(WiFi.localIP());
+  digitalWrite(BUILTIN_LED, HIGH);
+
 }
 
 void loop() {
@@ -39,9 +43,11 @@ void loop() {
     if (! photocell.publish("1")) {
       Serial.println(F("Failed"));
     } else {
+      digitalWrite(BUILTIN_LED, LOW);
       Serial.println(F("OK!"));
+      delay(500);
+      digitalWrite(BUILTIN_LED, HIGH);
     }
-    delay(1000);
   }
   delay(100);
 }
@@ -52,9 +58,9 @@ void MQTT_connect() {
     return;
   }
   uint8_t retries = 3;
-  while ((ret = mqtt.connect()) != 0) { 
+  while ((ret = mqtt.connect()) != 0) {
     mqtt.disconnect();
-    delay(5000); 
+    delay(5000);
     retries--;
     if (retries == 0) {
       while (1);
