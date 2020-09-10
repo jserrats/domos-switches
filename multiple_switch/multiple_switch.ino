@@ -3,12 +3,12 @@
 #include "Adafruit_MQTT_Client.h"
 
 #define WLAN_SSID       ""
-#define WLAN_PASS       ""
+#define WLAN_PASS       "s"
 
 int buttons[] = {540, 1024, 995, 912, 840, 779, 726, 680, 636, 600, 568, 514};
 
 WiFiClient client;
-Adafruit_MQTT_Client mqtt(&client, "10.0.1.1", 1883);
+Adafruit_MQTT_Client mqtt(&client, "mqtt.lan", 1883);
 Adafruit_MQTT_Publish photocell = Adafruit_MQTT_Publish(&mqtt, "domos/bedroom/multiple-switch");
 
 void setup()

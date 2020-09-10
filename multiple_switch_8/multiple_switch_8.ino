@@ -6,7 +6,7 @@
 #define WLAN_PASS       ""
 
 WiFiClient client;
-Adafruit_MQTT_Client mqtt(&client, "10.0.1.1", 1883);
+Adafruit_MQTT_Client mqtt(&client, "mqtt.lan", 1883);
 Adafruit_MQTT_Publish button = Adafruit_MQTT_Publish(&mqtt, "domos/desk/button");
 
 int pin_list[] = {D0, D1, D2, D3, D4, D5, D6, D7};
